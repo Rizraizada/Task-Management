@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Task</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Add a New Task</h1>
+    <form action="/articles/add" method="POST">
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" name="title" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea name="description" class="form-control" rows="4" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="status">Status:</label>
+        <select name="status" class="form-control" required>
+          <option value="pending">Pending</option>
+          <option value="in-progress">In Progress</option>
+          <option value="completed">Completed</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="dueDate">Due Date:</label>
+        <input type="date" name="dueDate" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Task</button>
+    </form>
+  </div>
+
+  <div class="container mt-5">
+    <% if (tasks && tasks.length) { %>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Due Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% tasks.forEach(function(task) { %>
+                <tr>
+                    <td><%= task.title %></td>
+                    <td><%= task.description %></td>
+                    <td><%= task.status %></td>
+                    <td><%= new Date(task.dueDate).toDateString() %></td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" onclick="openEditModal('<%= task._id %>', '<%= task.title %>', '<%= task.description %>', '<%= task.status %>', '<%= task.dueDate.toISOString().substring(0, 10) %>')">Edit</button>
+                        <form action="/articles/delete/<%= task._id %>" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+    <% } else { %>
+    <p class="text-center">No tasks found.</p>
+    <% } %>
+  </div>
+
+  <!-- Edit Modal -->
+  <div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form id="editForm" method="POST">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Edit Task</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="editTitle">Title:</label>
+              <input type="text" name="title" id="editTitle" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="editDescription">Description:</label>
+              <textarea name="description" id="editDescription" class="form-control" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="editStatus">Status:</label>
+              <select name="status" id="editStatus" class="form-control" required>
+                <option value="pending">Pending</option>
+                <option value="in-progress">In Progress</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="editDueDate">Due Date:</label>
+              <input type="date" name="dueDate" id="editDueDate" class="form-control" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    function openEditModal(id, title, description, status, dueDate) {
+      $('#editForm').attr('action', '/articles/edit/' + id);
+      $('#editTitle').val(title);
+      $('#editDescription').val(description);
+      $('#editStatus').val(status);
+      $('#editDueDate').val(dueDate);
+      $('#editModal').modal('show');
+    }
+
+    function closeEditModal() {
+      $('#editModal').modal('hide');
+    }
+  </script>
+</body>
+</html>

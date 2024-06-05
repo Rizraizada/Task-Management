@@ -1,0 +1,30 @@
+{
+  "name": "node....taskmanage",
+  "version": "1.0.0",
+  "description": "Task Manager",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app",
+    "build:css": "npx postcss src/styles.css -o public/styles.css"
+  },
+  "keywords": [
+    "@zahid\u001b[D\u001b[D\u001b[D\u001b[Z"
+  ],
+  "author": "\u001a\u001a\u001a\u001b[A\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[\u001b@Zahid",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.4.19",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "mongoose": "^8.4.1",
+    "mongose": "^0.0.2-security",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "postcss": "^8.4.38",
+    "pug": "^3.0.3",
+    "tailwindcss": "^3.4.3"
+  }
+}
