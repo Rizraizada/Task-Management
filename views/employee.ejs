@@ -6,6 +6,25 @@
     <title>Employee Profile</title>
     <!-- AdminLTE CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      .profile-image {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+      .card-title {
+        margin-bottom: 0.5rem;
+      }
+      .card-text {
+        margin-bottom: 0.25rem;
+      }
+      .cv-section {
+        margin-bottom: 1.5rem;
+      }
+    </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -82,11 +101,26 @@
         <!-- Employee Profile Card -->
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Username: <%= employee.username %></h5>
-            <p class="card-text">Email: <%= employee.email %></p>
-            <p class="card-text">Designation: <%= employee.designation %></p>
-            <p class="card-text">Department: <%= employee.department %></p>
-            <p class="card-text">Address: <%= employee.address %></p>
+            <div class="row">
+              <div class="col-md-4 text-center">
+                <img src="https://via.placeholder.com/150" alt="Employee Photo" class="profile-image">
+              </div>
+              <div class="col-md-8">
+                <div class="cv-section">
+                  <h5 class="card-title">Username: <%= employee.username %></h5>
+                  <p class="card-text">Email: <%= employee.email %></p>
+                </div>
+                <div class="cv-section">
+                  <h5 class="card-title">Professional Information</h5>
+                  <p class="card-text">Designation: <%= employee.designation %></p>
+                  <p class="card-text">Department: <%= employee.department %></p>
+                </div>
+                <div class="cv-section">
+                  <h5 class="card-title">Contact Information</h5>
+                  <p class="card-text">Address: <%= employee.address %></p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <!-- /.card -->
@@ -100,5 +134,9 @@
 
 <!-- AdminLTE Script -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/js/adminlte.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,134 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add Task</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management</title>
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-  <div class="container mt-5">
-    <h1 class="text-center mb-4">Add a New Task</h1>
-    <form action="/articles/add" method="POST">
-      <div class="form-group">
-        <label for="title">Title:</label>
-        <input type="text" name="title" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea name="description" class="form-control" rows="4" required></textarea>
-      </div>
-      <div class="form-group">
-        <label for="status">Status:</label>
-        <select name="status" class="form-control" required>
-          <option value="pending">Pending</option>
-          <option value="in-progress">In Progress</option>
-          <option value="completed">Completed</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="dueDate">Due Date:</label>
-        <input type="date" name="dueDate" class="form-control" required>
-      </div>
-      <button type="submit" class="btn btn-primary">Add Task</button>
-    </form>
-  </div>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
 
-  <div class="container mt-5">
-    <% if (tasks && tasks.length) { %>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                    <th>Due Date</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% tasks.forEach(function(task) { %>
-                <tr>
-                    <td><%= task.title %></td>
-                    <td><%= task.description %></td>
-                    <td><%= task.status %></td>
-                    <td><%= new Date(task.dueDate).toDateString() %></td>
-                    <td>
-                        <button class="btn btn-warning btn-sm" onclick="openEditModal('<%= task._id %>', '<%= task.title %>', '<%= task.description %>', '<%= task.status %>', '<%= task.dueDate.toISOString().substring(0, 10) %>')">Edit</button>
-                        <form action="/articles/delete/<%= task._id %>" method="POST" class="d-inline">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="/" class="brand-link">
+      <span class="brand-text font-weight-light">Task Management</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="/" class="nav-link">
+              <i class="nav-icon fas fa-home"></i>
+              <p>Home</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/articles/add" class="nav-link">
+              <i class="nav-icon fas fa-plus"></i>
+              <p>Add Task</p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Add a New Task</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-8 mx-auto">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Add Task</h3>
+              </div>
+              <div class="card-body">
+                <form action="/articles/add" method="POST">
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="title">Title:</label>
+                      <input type="text" name="title" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="status">Status:</label>
+                      <select name="status" class="form-control" required>
+                        <option value="pending">Pending</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="dueDate">Due Date:</label>
+                      <input type="date" name="dueDate" class="form-control" required>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-12">
+                      <label for="description">Description:</label>
+                      <textarea name="description" class="form-control" rows="4" required></textarea>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Add Task</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Task List Section -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="mt-5">
+          <% if (tasks && tasks.length) { %>
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Task List</h3>
+              </div>
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Description</th>
+                      <th>Status</th>
+                      <th>Due Date</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% tasks.forEach(function(task) { %>
+                      <tr>
+                        <td><%= task.title %></td>
+                        <td><%= task.description %></td>
+                        <td><%= task.status %></td>
+                        <td><%= new Date(task.dueDate).toDateString() %></td>
+                        <td>
+                          <button class="btn btn-warning btn-sm" onclick="openEditModal('<%= task._id %>', '<%= task.title %>', '<%= task.description %>', '<%= task.status %>', '<%= task.dueDate.toISOString().substring(0, 10) %>')">Edit</button>
+                          <form action="/articles/delete/<%= task._id %>" method="POST" class="d-inline">
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                <% }); %>
-            </tbody>
-        </table>
-    </div>
-    <% } else { %>
-    <p class="text-center">No tasks found.</p>
-    <% } %>
-  </div>
+                          </form>
+                        </td>
+                      </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          <% } else { %>
+            <p class="text-center">No tasks found.</p>
+          <% } %>
+        </div>
+      </div>
+    </section>
 
-  <!-- Edit Modal -->
-  <div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <form id="editForm" method="POST">
-          <div class="modal-header">
-            <h5 class="modal-title" id="editModalLabel">Edit Task</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="editTitle">Title:</label>
-              <input type="text" name="title" id="editTitle" class="form-control" required>
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form id="editForm" method="POST">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editModalLabel">Edit Task</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-            <div class="form-group">
-              <label for="editDescription">Description:</label>
-              <textarea name="description" id="editDescription" class="form-control" rows="4" required></textarea>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="editTitle">Title:</label>
+                <input type="text" name="title" id="editTitle" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="editDescription">Description:</label>
+                <textarea name="description" id="editDescription" class="form-control" rows="4" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="editStatus">Status:</label>
+                <select name="status" id="editStatus" class="form-control" required>
+                  <option value="pending">Pending</option>
+                  <option value="in-progress">In Progress</option>
+                  <option value="completed">Completed</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="editDueDate">Due Date:</label>
+                <input type="date" name="dueDate" id="editDueDate" class="form-control" required>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="editStatus">Status:</label>
-              <select name="status" id="editStatus" class="form-control" required>
-                <option value="pending">Pending</option>
-                <option value="in-progress">In Progress</option>
-                <option value="completed">Completed</option>
-              </select>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
-            <div class="form-group">
-              <label for="editDueDate">Due Date:</label>
-              <input type="date" name="dueDate" id="editDueDate" class="form-control" required>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Save changes</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
+
   </div>
+</div>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- AdminLTE Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/js/adminlte.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-  <script>
-    function openEditModal(id, title, description, status, dueDate) {
-      $('#editForm').attr('action', '/articles/edit/' + id);
-      $('#editTitle').val(title);
-      $('#editDescription').val(description);
-      $('#editStatus').val(status);
-      $('#editDueDate').val(dueDate);
-      $('#editModal').modal('show');
-    }
+<script>
+  function openEditModal(id, title, description, status, dueDate) {
+    $('#editForm').attr('action', '/articles/edit/' + id);
+    $('#editTitle').val(title);
+    $('#editDescription').val(description);
+    $('#editStatus').val(status);
+    $('#editDueDate').val(dueDate);
+    $('#editModal').modal('show');
+  }
 
-    function closeEditModal() {
-      $('#editModal').modal('hide');
-    }
-  </script>
+  function closeEditModal() {
+    $('#editModal').modal('hide');
+  }
+</script>
 </body>
 </html>
