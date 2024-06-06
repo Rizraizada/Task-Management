@@ -7,73 +7,89 @@
     <title>Home</title>
     <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
 
-<body class="bg-gray-100">
-    <nav class="bg-green-600 text-white py-6">
+<body class="bg-gray-50">
+    <nav class="bg-gray-900 text-white py-6 shadow-lg">
         <div class="container mx-auto flex justify-center items-center">
-            <ul class="flex">
-                <li><a href="/" class="hover:bg-green-500 px-4 py-2 rounded">Home</a></li>
-                <li><a href="/about" class="hover:bg-green-500 px-4 py-2 rounded">About</a></li>
-                <li><a href="/login" class="hover:bg-green-500 px-4 py-2 rounded">Login</a></li>
-                <li><a href="/register" class="hover:bg-green-500 px-4 py-2 rounded">Register</a></li>
+            <!-- <div class="text-2xl font-bold">Task Management</div> -->
+            <ul class="flex space-x-8">
+                <li><a href="/" class="hover:text-gray-300 transition duration-300">Home</a></li>
+                <li><a href="/about" class="hover:text-gray-300 transition duration-300">About</a></li>
+                <li><a href="/login" class="hover:text-gray-300 transition duration-300">Login</a></li>
+                <li><a href="/register" class="hover:text-gray-300 transition duration-300">Register</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Slider -->
-    <div class="relative h-96 overflow-hidden">
-        <div class="absolute inset-0 overflow-hidden" style="height: 700px;">
-            <div class="absolute inset-y-0 left-0 w-1/2 bg-gray-900 bg-opacity-50"></div>
-            <img src="/images/task-management-process.png" alt="Slider Image 1" class="absolute inset-0 w-full h-full object-cover">
+    <div class="relative h-screen overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="/images/task-management-process.png" alt="Slider Image 1" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black opacity-50"></div>
         </div>
-        
         <div class="relative flex justify-center items-center h-full">
-            <div class="text-center text-black">
-                <h1 class="text-4xl font-bold mb-4">Welcome to Our Website</h1>
-                <p class="text-lg mb-8">Discover the best solutions for your business.</p>
-                <a href="#" class="bg-green-500 hover:bg-green-600 text-black font-semibold py-3 px-8 rounded-full">Get Started</a>
+            <div class="text-center text-white px-6">
+                <h1 class="text-5xl font-bold mb-4">Welcome to Our Website</h1>
+                <p class="text-xl mb-8">Discover the best solutions for your business.</p>
+                <a href="#" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-full transition duration-300">Get Started</a>
             </div>
         </div>
     </div>
 
-    <!-- Three Divs -->
-    <div class="container mx-auto my-10 px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-green-800 p-12 rounded-lg text-center hover:bg-green-600 transition-colors duration-300 ease-in-out">
-            <h2 class="text-xl font-semibold mb-4">Feature 1</h2>
-            <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </div>
-        <div class="bg-blue-800 p-12 rounded-lg text-center hover:bg-blue-600 transition-colors duration-300 ease-in-out">
-            <h2 class="text-xl font-semibold mb-4">Feature 2</h2>
-            <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </div>
-        <div class="bg-purple-800 p-12 rounded-lg text-center hover:bg-purple-600 transition-colors duration-300 ease-in-out">
-            <h2 class="text-xl font-semibold mb-4">Feature 3</h2>
-            <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </div>
-    </div>
-
-    <div class="container mx-auto my-10 px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-green-800 p-12 rounded-lg text-center hover:bg-green-600 transition-colors duration-300 ease-in-out">
-            <h2 class="text-xl font-semibold mb-4">Feature 1</h2>
-            <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </div>
-        <div class="bg-blue-800 p-12 rounded-lg text-center hover:bg-blue-600 transition-colors duration-300 ease-in-out">
-            <h2 class="text-xl font-semibold mb-4">Feature 2</h2>
-            <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </div>
-        <div class="bg-purple-800 p-12 rounded-lg text-center hover:bg-purple-600 transition-colors duration-300 ease-in-out">
-            <h2 class="text-xl font-semibold mb-4">Feature 3</h2>
-            <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <!-- Features Section -->
+    <div class="container mx-auto my-20 px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-12 rounded-lg shadow-lg text-center transition transform hover:scale-105 duration-300 ease-in-out">
+                <h2 class="text-2xl font-semibold mb-4">Feature 1</h2>
+                <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+            <div class="bg-white p-12 rounded-lg shadow-lg text-center transition transform hover:scale-105 duration-300 ease-in-out">
+                <h2 class="text-2xl font-semibold mb-4">Feature 2</h2>
+                <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+            <div class="bg-white p-12 rounded-lg shadow-lg text-center transition transform hover:scale-105 duration-300 ease-in-out">
+                <h2 class="text-2xl font-semibold mb-4">Feature 3</h2>
+                <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
         </div>
     </div>
 
-    <footer class="bg-gray-800 text-white py-4">
+    <!-- Duplicate Features Section -->
+    <div class="container mx-auto my-20 px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-12 rounded-lg shadow-lg text-center transition transform hover:scale-105 duration-300 ease-in-out">
+                <h2 class="text-2xl font-semibold mb-4">Feature 1</h2>
+                <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+            <div class="bg-white p-12 rounded-lg shadow-lg text-center transition transform hover:scale-105 duration-300 ease-in-out">
+                <h2 class="text-2xl font-semibold mb-4">Feature 2</h2>
+                <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+            <div class="bg-white p-12 rounded-lg shadow-lg text-center transition transform hover:scale-105 duration-300 ease-in-out">
+                <h2 class="text-2xl font-semibold mb-4">Feature 3</h2>
+                <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white py-10">
         <div class="container mx-auto text-center">
-            &copy; 2022 Your Company. All rights reserved.
+            <div class="mb-6">
+                <a href="/" class="text-2xl font-bold">YourBrand</a>
+            </div>
+            <p>&copy; 2023 Your Company. All rights reserved.</p>
+            <div class="mt-4">
+                <a href="#" class="hover:text-gray-300 transition duration-300 mx-2">Privacy Policy</a>
+                <a href="#" class="hover:text-gray-300 transition duration-300 mx-2">Terms of Service</a>
+            </div>
         </div>
     </footer>
-
 </body>
 
 </html>
